@@ -1,16 +1,17 @@
-class Solution:
-    def generate(self, numRows: int) -> List[List[int]]:
-        if numRows==1:
-            return [[1]]
-        mod=10**9+7
-        l=[[1],[1,1]]
-        for i in range(1,numRows-1):
-            lst=[1,1]
-            l1=l[i]
-            for j in range(1,i+1):
-                lst.insert(j,l1[j]+l1[j-1]%mod)
-            l.append(lst)
-        return l
-
-
-        
+class Solution(object):
+    def generate(self, numRows):
+        output = []
+        for i in range(numRows):
+            if(i == 0):
+                prev = [1]
+                output.append(prev)
+            else:
+                curr = [1]
+                j = 1
+                while(j < i):
+                    curr.append(prev[j-1] + prev[j])
+                    j+=1
+                curr.append(1)
+                output.append(curr)
+                prev = curr
+        return output      
