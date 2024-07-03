@@ -11,20 +11,43 @@
  */
 class Solution {
 public:
-    void shilpa(TreeNode* root, vector<int>&v)
+    vector<int> inorderTraversal(TreeNode* root)
     {
-        if(root==NULL) return ;
-        if(root!=NULL)
+        vector<int> res;
+        stack<TreeNode*>s;
+        TreeNode* node =root;
+        while(true)
         {
-            shilpa(root->left,v);
-            v.push_back(root->val);
-            shilpa(root->right,v);
+            if(node!=NULL)
+            {
+                s.push(node);
+            node=node->left;
+            }
+            else
+            {
+                if(s.empty()==true) break;
+                node=s.top();
+                s.pop();
+                res.push_back(node->val);
+                node=node->right;
+            }
         }
+        return res;
     }
-    vector<int> inorderTraversal(TreeNode* root) {
-        vector <int> v;
-        shilpa(root,v);
-        return v;
+    // void shilpa(TreeNode* root, vector<int>&v)
+    // {
+    //     if(root==NULL) return ;
+    //     if(root!=NULL)
+    //     {
+    //         shilpa(root->left,v);
+    //         v.push_back(root->val);
+    //         shilpa(root->right,v);
+    //     }
+    // }
+    // vector<int> inorderTraversal(TreeNode* root) {
+    //     vector <int> v;
+    //     shilpa(root,v);
+    //     return v;
         
-    }
+    // }
 };
